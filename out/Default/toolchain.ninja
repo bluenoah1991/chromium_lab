@@ -1,0 +1,8 @@
+rule stamp
+  command = python ../../build/toolchain/win/tool_wrapper.py stamp ${out}
+rule copy
+  command = python ../../build/toolchain/win/tool_wrapper.py recursive-mirror ${in} ${out}
+
+build gen/1.txt: copy ../../1.txt
+
+build obj/default.stamp: stamp gen/1.txt

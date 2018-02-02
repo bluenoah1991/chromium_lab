@@ -1,0 +1,11 @@
+template("test") {
+  copy(target_name) {
+    sources = invoker.sources
+    outputs = invoker.outputs
+  }
+}
+
+test("default") {
+    sources = [ "1.txt" ]
+    outputs = [ "$target_gen_dir/1.txt" ]
+}

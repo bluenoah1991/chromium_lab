@@ -1,0 +1,11 @@
+_tool_wrapper_path = rebase_path("//build/toolchain/win/tool_wrapper.py", root_build_dir)
+
+toolchain("default") {
+    tool("copy") {
+        command = "python $_tool_wrapper_path recursive-mirror {{source}} {{output}}"
+    }
+
+    tool("stamp") {
+        command = "python $_tool_wrapper_path stamp {{output}}"
+    }
+}
