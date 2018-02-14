@@ -14,6 +14,12 @@
       "externalConsole": true
     },
     {
+      "name": "Default Build Attach Debug",
+      "type": "cppvsdbg",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    },
+    {
       "name": "Chrome Debug",
       "type": "cppdbg",
       "request": "launch",
