@@ -1,0 +1,75 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Default Build Chrome Debug",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}\\out\\Default\\chrome.exe",
+      "args": [], // Optional command line args
+      "preLaunchTask": "0-default_build_chrome_debug",
+      "stopAtEntry": true,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": true
+    },
+    {
+      "name": "Chrome Debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "targetArchitecture": "x64",
+      "program": "${workspaceRoot}/out/Debug/chrome",
+      "args": [], // Optional command line args
+      "preLaunchTask": "1-build_chrome_debug",
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": true
+    },
+    {
+      "name": "Chrome Release",
+      "type": "cppdbg",
+      "request": "launch",
+      "targetArchitecture": "x64",
+      "program": "${workspaceRoot}/out/Release/chrome",
+      "args": [], // Optional command line args
+      "preLaunchTask": "2-build_chrome_release",
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": true
+    },
+    {
+      "name": "Custom Test Debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "targetArchitecture": "x64",
+      "program": "${workspaceRoot}/out/Debug/unit_tests",
+      "args": [
+        "--gtest_filter=*",
+        "--single_process",
+        "--ui-test-action-max-timeout=1000000",
+        "--test-launcher-timeout=1000000"
+      ],
+      "preLaunchTask": "5-build_test_debug",
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": true
+    },
+    {
+      "name": "Attach Debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "targetArchitecture": "x64",
+      "program": "${workspaceRoot}/out/Debug/chrome",
+      "args": [
+        "--remote-debugging-port=2224"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": false
+    }
+  ]
+}
