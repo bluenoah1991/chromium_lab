@@ -1,6 +1,8 @@
-# 扩展 **Window** 对象
+# **JAVASCRIPT** 扩展
 
-## 创建 **HelloWorld** 类
+## 扩展 **Window** 对象
+
+### 创建 **HelloWorld** 类
 
 > //src/third_party/WebKit/Source/core/frame/HelloWorld.h
 
@@ -67,9 +69,9 @@
       [CallWith=ScriptState] void print();
     };
 
-## 为 **Window** 对象扩展 **World** 属性
+### 为 **Window** 对象扩展 **World** 属性
 
-### 为 **DOMWindow** 类添加 **World** 虚方法
+#### 为 **DOMWindow** 类添加 **World** 虚方法
 
 > //src/third_party/WebKit/Source/core/frame/DOMWindow.h
 
@@ -83,7 +85,7 @@
 
     virtual HelloWorld* world() const = 0; // 命名使用小写
 
-### 为 **LocalDOMWindow** 添加 **World** 实现
+#### 为 **LocalDOMWindow** 添加 **World** 实现
 
 > //src/third_party/WebKit/Source/core/frame/LocalDOMWindow.h
 
@@ -162,7 +164,7 @@
       return helloworld_.Get();
     }
 
-### **RemoteDOMWindow** 类也需要添加
+#### **RemoteDOMWindow** 类也需要添加
 
 > //src/third_party/WebKit/Source/core/frame/RemoteDOMWindow.h
 
@@ -179,25 +181,112 @@
       return nullptr;
     }
 
-### Window.idl 中也需要添加定义
+#### Window.idl 中也需要添加定义
 
     [Replaceable] readonly attribute HelloWorld world;
 
-## 为新添加的类提供配置GN
+### 为新添加的类提供配置GN
 
 
-### 向 *blink_core_sources("frame")* 中添加文件
+#### 向 *blink_core_sources("frame")* 中添加文件
 
 > //src/third_party/WebKit/Source/core/frame/BUILD.gn
 
     "HelloWorld.h",
     "HelloWorld.cpp",
 
-### 向 *core_idl_files* 中添加文件
+#### 向 *core_idl_files* 中添加文件
 
 > //src/third_party/WebKit/Source/core/core_idl_files.gni
 
     "frame/HelloWorld.idl",
+
+## 扩展自定义对象类型
+
+### 创建 **Hobby** 类
+
+> //src/third_party/WebKit/Source/core/frame/Hobby.h
+
+    #ifndef Hobby_h
+    #define Hobby_h
+
+    #include "platform/bindings/ScriptWrappable.h"
+
+    namespace blink {
+
+    class ScriptState;
+
+    class CORE_EXPORT Hobby final : public ScriptWrappable {
+      DEFINE_WRAPPERTYPEINFO();
+
+    public:
+      static Hobby* Create(const String& str) {
+        return new Hobby(str);
+      }
+      ~Hobby();
+
+      // https://chromium.googlesource.com/chromium/src/+/master/third_party/WebKit/Source/bindings/IDLExtendedAttributes.md#callwith_scriptstate_m_a
+      void Say(ScriptState* state);
+
+    private:
+      Hobby(const String& str);
+
+      String str_;
+    };
+
+    } // namespace blink
+
+    #endif // Hobby_h
+
+> //src/third_party/WebKit/Source/core/frame/Hobby.cpp
+
+    #include "core/frame/Hobby.h"
+
+    #include "core/frame/LocalDOMWindow.h"
+    #include "core/frame/FrameConsole.h"
+    #include "core/inspector/ConsoleMessage.h"
+
+    namespace blink {
+
+    Hobby::Hobby(const String& str) {
+      str_ = str;
+    }
+
+    Hobby::~Hobby() = default;
+
+    void Hobby::Say(ScriptState* state) {
+      LocalDOMWindow* window = LocalDOMWindow::From(state);
+      window->GetFrameConsole()->AddMessage(ConsoleMessage::Create(
+         kJSMessageSource, kInfoMessageLevel,
+        str_));
+    }
+
+    } // namespace blink
+
+> //src/third_party/WebKit/Source/core/frame/Hobby.idl
+
+    [
+      Constructor(USVString str),
+      Exposed=(Window,Worker)
+    ] interface Hobby {
+      [CallWith=ScriptState] void Say();
+    };
+
+### 为新添加的类提供配置GN
+
+
+#### 向 *blink_core_sources("frame")* 中添加文件
+
+> //src/third_party/WebKit/Source/core/frame/BUILD.gn
+
+    "Hobby.h",
+    "Hobby.cpp",
+
+#### 向 *core_idl_files* 中添加文件
+
+> //src/third_party/WebKit/Source/core/core_idl_files.gni
+
+    "frame/Hobby.idl",
 
 ## 调试
 
