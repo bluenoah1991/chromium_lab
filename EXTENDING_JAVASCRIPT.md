@@ -220,18 +220,18 @@
       DEFINE_WRAPPERTYPEINFO();
 
     public:
-      static Hobby* Create(const String& str) {
-        return new Hobby(str);
+      static Hobby* Create(const String& name) {
+        return new Hobby(name);
       }
       ~Hobby();
 
       // https://chromium.googlesource.com/chromium/src/+/master/third_party/WebKit/Source/bindings/IDLExtendedAttributes.md#callwith_scriptstate_m_a
-      void Say(ScriptState* state);
+      void Say(ScriptState* state, const String& str);
 
     private:
-      Hobby(const String& str);
+      Hobby(const String& name);
 
-      String str_;
+      String name_;
     };
 
     } // namespace blink
@@ -248,17 +248,17 @@
 
     namespace blink {
 
-    Hobby::Hobby(const String& str) {
-      str_ = str;
+    Hobby::Hobby(const String& name) {
+      name_ = name;
     }
 
     Hobby::~Hobby() = default;
 
-    void Hobby::Say(ScriptState* state) {
+    void Hobby::Say(ScriptState* state, const String& str) {
       LocalDOMWindow* window = LocalDOMWindow::From(state);
       window->GetFrameConsole()->AddMessage(ConsoleMessage::Create(
          kJSMessageSource, kInfoMessageLevel,
-        str_));
+         "Hello " + name_ + ", " + str + "."));
     }
 
     } // namespace blink
@@ -266,10 +266,10 @@
 > //src/third_party/WebKit/Source/core/frame/Hobby.idl
 
     [
-      Constructor(USVString str),
+      Constructor(USVString name),
       Exposed=(Window,Worker)
     ] interface Hobby {
-      [CallWith=ScriptState] void Say();
+      [CallWith=ScriptState] void Say(DOMString str);
     };
 
 ### 为新添加的类提供配置GN
