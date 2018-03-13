@@ -9,3 +9,10 @@
 
 > https://www.chromium.org/developers/design-documents/inter-process-communication  
 > https://chromium.googlesource.com/chromium/src/+/master/mojo/README.md  
+
+## The Component Build & GN Build  
+
+> https://chromium.googlesource.com/chromium/src/+/master/docs/component_build.md  
+> https://chromium.googlesource.com/chromium/src/+/master/tools/gn/docs/quick_start.md  
+> https://chromium.googlesource.com/chromium/src/+/master/tools/gn/docs/reference.md  
+> https://www.chromium.org/developers/gn-build-configuration  
