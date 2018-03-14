@@ -288,6 +288,176 @@
 
     "frame/Hobby.idl",
 
+## 将实现封装成单独的组件（加速编译）
+
+### 创建新的 *hobby* 模块
+
+`mkdir src/third_party/WebKit/Source/core/hobby`  
+
+> //src/third_party/WebKit/Source/core/hobby/HobbyImpl.h
+
+    #ifndef HobbyImpl_h
+    #define HobbyImpl_h
+
+    #include "core/hobby/hobby_export.h"
+
+    namespace blink {
+
+    class HOBBY_EXPORT HobbyImpl {
+
+    public:
+      HobbyImpl();
+      ~HobbyImpl();
+
+      void Say();
+
+    };
+
+    } // namespace blink
+
+    #endif // HobbyImpl_h
+
+> //src/third_party/WebKit/Source/core/hobby/HobbyImpl.cpp
+
+    #include "core/hobby/HobbyImpl.h"
+
+    namespace blink {
+
+    HobbyImpl::HobbyImpl() {
+    }
+
+    HobbyImpl::~HobbyImpl() = default;
+
+    void HobbyImpl::Say() {
+    }
+
+    }
+    
+> //src/third_party/WebKit/Source/core/hobby/hobby_export.h
+
+    #ifndef HOBBY_HOBBY_EXPORT_H_
+    #define HOBBY_HOBBY_EXPORT_H_
+
+    #if defined(COMPONENT_BUILD)
+    #if defined(WIN32)
+
+    #if defined(HOBBY_IMPLEMENTATION)
+    #define HOBBY_EXPORT __declspec(dllexport)
+    #else
+    #define HOBBY_EXPORT __declspec(dllimport)
+    #endif  // defined(HOBBY_IMPLEMENTATION)
+
+    #else  // defined(WIN32)
+    #if defined(HOBBY_IMPLEMENTATION)
+    #define HOBBY_EXPORT __attribute__((visibility("default")))
+    #else
+    #define HOBBY_EXPORT
+    #endif
+    #endif
+
+    #else  // defined(COMPONENT_BUILD)
+    #define HOBBY_EXPORT
+    #endif
+
+    #endif  // HOBBY_HOBBY_EXPORT_H_
+
+> //src/third_party/WebKit/Source/core/hobby/BUILD.gn
+
+    component("hobby") {
+      output_name = "hobby"
+      sources = [
+        "HobbyImpl.h",
+        "HobbyImpl.cpp",
+      ]
+      defines = [ "HOBBY_IMPLEMENTATION" ]
+
+      include_dirs = [
+        "//third_party/WebKit/Source",
+      ]
+    }
+
+### 将 *hobby* 组件添加到 *core* 组件的依赖
+
+> //src/third_party/WebKit/Source/core/BUILD.gn
+
+    ...
+    
+    component("core") {
+    
+    ...
+    
+    deps = [
+      
+    ...
+    
+    "//third_party/WebKit/Source/core/hobby", # 添加
+
+### 修改 *Hobby* 类
+
+> //src/third_party/WebKit/Source/core/frame/Hobby.h
+
+    #ifndef Hobby_h
+    #define Hobby_h
+
+    #include "platform/bindings/ScriptWrappable.h"
+
+    namespace blink {
+
+    class ScriptState;
+    class HobbyImpl;
+
+    class CORE_EXPORT Hobby final : public ScriptWrappable {
+      DEFINE_WRAPPERTYPEINFO();
+
+    public:
+      static Hobby* Create(const String& name) {
+        return new Hobby(name);
+      }
+      ~Hobby();
+
+      // https://chromium.googlesource.com/chromium/src/+/master/third_party/WebKit/Source/bindings/IDLExtendedAttributes.md#callwith_scriptstate_m_a
+      void Say(ScriptState* state, const String& str);
+
+    private:
+      Hobby(const String& name);
+
+      String name_;
+      HobbyImpl *impl_;
+
+    };
+
+    } // namespace blink
+
+    #endif // Hobby_h
+
+> //src/third_party/WebKit/Source/core/frame/Hobby.cpp
+
+    #include "core/frame/Hobby.h"
+
+    #include "core/frame/LocalDOMWindow.h"
+    #include "core/frame/FrameConsole.h"
+    #include "core/inspector/ConsoleMessage.h"
+    #include "core/hobby/HobbyImpl.h"
+
+    namespace blink {
+
+    Hobby::Hobby(const String& name) {
+      name_ = name;
+      impl_ = new HobbyImpl();
+    }
+
+    Hobby::~Hobby() = default;
+
+    void Hobby::Say(ScriptState* state, const String& str) {
+      LocalDOMWindow* window = LocalDOMWindow::From(state);
+      window->GetFrameConsole()->AddMessage(ConsoleMessage::Create(
+         kJSMessageSource, kInfoMessageLevel,
+         "Hello " + name_ + ", " + str + "."));
+      impl_->Say();
+    }
+
+    } // namespace blink
+
 ## 调试
 
 在
