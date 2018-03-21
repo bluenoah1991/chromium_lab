@@ -458,6 +458,48 @@
 
     } // namespace blink
 
+## 扩展 *Window* 事件
+
+### 添加事件类型
+
+> //src/third_party/WebKit/Source/core/events/event_type_names.json5
+
+    ...
+    
+        "writeend",
+        "writestart",
+        "zoom",
+        "hobby", // 添加
+      ],
+    }
+
+### 添加事件监听器注册
+
+> //src/third_party/WebKit/Source/core/dom/GlobalEventHandlers.h
+
+    ...
+    
+    DEFINE_STATIC_ATTRIBUTE_EVENT_LISTENER(hobby);
+    
+    ...
+
+### 触发事件
+
+> //src/third_party/WebKit/Source/core/frame/Hobby.cpp
+
+    ...
+    
+    void Hobby::Say(ScriptState* state, const String& str) {
+      LocalDOMWindow* window = LocalDOMWindow::From(state);
+      window->GetFrameConsole()->AddMessage(ConsoleMessage::Create(
+        kJSMessageSource, kInfoMessageLevel,
+        "Hello " + name_ + ", " + str + "."));
+      Event* hobby_event(Event::Create(EventTypeNames::hobby));
+      window->DispatchEvent(hobby_event, window->document());
+    }
+    
+    ...
+
 ## 调试
 
 在
