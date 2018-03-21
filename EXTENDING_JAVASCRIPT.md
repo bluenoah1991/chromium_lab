@@ -487,6 +487,8 @@
 
 > //src/third_party/WebKit/Source/core/frame/Hobby.cpp
 
+    #include "core/dom/events/Event.h"
+
     ...
     
     void Hobby::Say(ScriptState* state, const String& str) {
