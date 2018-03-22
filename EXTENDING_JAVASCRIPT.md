@@ -502,6 +502,133 @@
     
     ...
 
+## 事件传参
+
+### 创建新的事件类型（派生自 *Event* ）
+
+> //src/third_party/WebKit/Source/core/events/HobbyEvent.h
+
+    #ifndef HobbyEvent_h
+    #define HobbyEvent_h
+
+    #include "core/dom/events/Event.h"
+
+    namespace blink {
+
+      class ScriptState;
+
+      class HobbyEvent : public Event {
+        DEFINE_WRAPPERTYPEINFO();
+
+      public:
+        static HobbyEvent* Create() { return new HobbyEvent; }
+
+        static HobbyEvent* Create(ScriptState* state, 
+                                  const AtomicString& event_type,
+                                  const String& str);
+
+        static HobbyEvent* Create(const AtomicString& event_type,
+                                  const String& str);
+
+        String str();
+        void setStr(const String&);
+
+        ~HobbyEvent() override;
+
+      protected:
+        HobbyEvent();
+
+        HobbyEvent(const AtomicString& event_type, const String& str);
+
+      private:
+        String str_;
+
+      };
+
+    }
+
+    #endif
+
+> //src/third_party/WebKit/Source/core/events/HobbyEvent.cpp
+
+    #include "core/events/HobbyEvent.h"
+
+    namespace blink {
+
+    HobbyEvent* HobbyEvent::Create(ScriptState* state, 
+                                   const AtomicString& event_type,
+                                   const String& str) {
+      return new HobbyEvent(event_type, str);
+    }
+
+    HobbyEvent* HobbyEvent::Create(const AtomicString& event_type,
+                                   const String& str) {
+      return new HobbyEvent(event_type, str);
+    }
+
+    String HobbyEvent::str() {
+      return str_;
+    }
+
+    void HobbyEvent::setStr(const String& str) {
+      str_ = str;
+    }
+
+    HobbyEvent::HobbyEvent() : Event("", false, false) {
+
+    }
+
+    HobbyEvent::HobbyEvent(const AtomicString& event_type, 
+                           const String& str) 
+      : Event(event_type, false, false) {
+      str_ = str;
+    }
+
+    HobbyEvent::~HobbyEvent() = default;
+
+    }
+
+> //src/third_party/WebKit/Source/core/events/HobbyEvent.idl
+
+    [
+      Constructor(DOMString event_type, DOMString str),
+      ConstructorCallWith=ScriptState,
+      Exposed=Window
+    ] interface HobbyEvent : Event {
+      attribute DOMString str;
+    };
+
+### 将 *HobbyEvent* 添加到GN构建中
+
+> //src/third_party/WebKit/Source/core/events/BUILD.gn
+
+    "HobbyEvent.cpp",
+    "HobbyEvent.h",
+
+> //src/third_party/WebKit/Source/core/core_idl_files.gni
+
+    "events/HobbyEvent.idl",
+
+## 添加触发事件代码
+
+> //src/third_party/WebKit/Source/core/frame/Hobby.cpp
+
+    ...
+    
+    #include "core/events/HobbyEvent.h"
+    
+    ...
+    
+      void Hobby::Say(ScriptState* state, const String& str) {
+        String str_ = "Hello " + name_ + ", " + str + ".";
+        LocalDOMWindow* window = LocalDOMWindow::From(state);
+        window->GetFrameConsole()->AddMessage(ConsoleMessage::Create(
+          kJSMessageSource, kInfoMessageLevel, str_));
+        impl_->Say();
+        HobbyEvent* hobby_event(HobbyEvent::Create(EventTypeNames::hobby, str_));
+        window->DispatchEvent(hobby_event, window->document());
+      }
+
 ## 调试
 
 在
