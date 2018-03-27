@@ -36,6 +36,12 @@
     $ git config --global core.filemode false
     $ git config --global branch.autosetuprebase always
 
+## 拷贝 *git cache*
+
+将之前准备的 *git cache* 拷贝并解压到`C:\chromium_git_cache`目录，并配置环境变量
+
+    set GCLIENT_CACHE_DIR=C:\chromium_git_cache
+
 ## 获取 *chromium* 代码
 
 创建`C:\chromium`目录，进入目录并运行
