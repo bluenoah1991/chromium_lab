@@ -61,7 +61,37 @@
 
     set LIBCHROMIUMCONTENT_GIT_CACHE=C:\libchromiumcontent_git_cache
 
-取消对`script\bootstrap.py`文件的修改，并修改`vendor\libchromiumcontent\script\build-libchromiumcontent.py`文件
+取消对`script\bootstrap.py`文件的修改，改为
+
+    def main():
+      os.chdir(SOURCE_ROOT)
+
+      args = parse_args()
+      defines = args_to_defines(args)
+      if not args.yes and PLATFORM != 'win32':
+        check_root()
+      if args.verbose:
+        enable_verbose_mode()
+      if sys.platform == 'cygwin':
+        update_win32_python()
+
+      update_submodules()
+      return
+
+      libcc_source_path = args.libcc_source_path
+      libcc_shared_library_path = args.libcc_shared_library_path
+      libcc_static_library_path = args.libcc_static_library_path
+
+      if args.target_arch == 'mips64el':
+        download_mips64el_toolchain()
+
+      # Redirect to use local libchromiumcontent build.
+      if args.build_release_libcc or args.build_debug_libcc:
+        build_libchromiumcontent(args.verbose, args.target_arch, defines,
+                                 args.build_debug_libcc, args.update_libcc)
+        return # 添加
+
+并修改`vendor\libchromiumcontent\script\build-libchromiumcontent.py`文件
 
     def main():
       os.chdir(LIBCC_DIR)
