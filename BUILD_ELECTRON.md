@@ -86,9 +86,13 @@
 
       # Redirect to use local libchromiumcontent build.
       if args.build_release_libcc or args.build_debug_libcc:
-        build_libchromiumcontent(args.verbose, args.target_arch, defines,
+        build_libchromiumcontent(args.verbose, args.target_arch,
                                  args.build_debug_libcc, args.update_libcc)
-        return # 添加
+      return
+        #dist_dir = os.path.join(VENDOR_DIR, 'libchromiumcontent', 'dist', 'main')
+        #libcc_source_path = os.path.join(dist_dir, 'src')
+        #libcc_shared_library_path = os.path.join(dist_dir, 'shared_library')
+        #libcc_static_library_path = os.path.join(dist_dir, 'static_library')
 
 并修改`script\build-libchromiumcontent.py`文件
 
