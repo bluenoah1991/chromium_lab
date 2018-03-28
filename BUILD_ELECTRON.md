@@ -91,7 +91,7 @@
                                  args.build_debug_libcc, args.update_libcc)
         return # 添加
 
-并修改`vendor\libchromiumcontent\script\build-libchromiumcontent.py`文件
+并修改`script\build-libchromiumcontent.py`文件
 
     def main():
       os.chdir(LIBCC_DIR)
