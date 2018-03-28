@@ -76,7 +76,6 @@
         update_win32_python()
 
       update_submodules()
-      return
 
       libcc_source_path = args.libcc_source_path
       libcc_shared_library_path = args.libcc_shared_library_path
