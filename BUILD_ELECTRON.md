@@ -122,7 +122,7 @@
 
 这里有个Windows SDK版本问题，参考PR [error-c2371-client_id-redefinition-different-basic-types](https://github.com/codemeow5/chromium_lab/blob/master/TROUBLESHOOTING.md#error-c2371-client_id-redefinition-different-basic-types) 进行修改
 
-取消`vendor\libchromiumcontent\script\build-libchromiumcontent.py`文件修改，重新执行脚本开始编译
+取消对`script\bootstrap.py`和`script\build-libchromiumcontent.py`文件的修改，重新执行脚本开始编译
 
 待完毕后执行
 
