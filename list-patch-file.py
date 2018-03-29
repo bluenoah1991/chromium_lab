@@ -16,7 +16,8 @@ def paths_from_patch_file(patch_file):
 		lines = f.readlines()
 		for line in lines:
 			if line.startswith('diff '):
-				paths.append(line)
+				path = re.search('(?:--git a)(\S+)', line).group(1)
+				paths.append(path)
 	return paths
 
 def paths_from_cwd():
@@ -24,11 +25,12 @@ def paths_from_cwd():
 	patch_files = patches_from_directory()
 	for patch_file in patch_files:
 		paths.extend(paths_from_patch_file(patch_file))
-	return list(set(paths))
+	paths = list(set(paths))
+	paths.sort()
+	return paths
 	
 def main():
 	for index, path in enumerate(paths_from_cwd()):
-		path = re.search('(?:--git a)(\S+)', path).group(1)
 		print '%s: %s' % (index, path) 
 	
 if __name__ == '__main__':
