@@ -135,3 +135,18 @@
     python script\build.py -c D
 
 进行编译
+
+## 跳过 *libchromiumcontent* 拷贝发行过程，直接编译
+
+接受 [update_dist_path.diff](https://github.com/codemeow5/chromium_lab/blob/master/update_dist_path.diff)补丁
+
+运行
+
+    python script\bootstrap.py -v --target_arch=ia32 --libcc_source_path=C:\electron\vendor\libchromiumcontent\src --libcc_shared_library_path=C:\electron\vendor\libchromiumcontent\src\out-ia32\shared_library --libcc_static_library_path=C:\electron\vendor\libchromiumcontent\src\out-ia32\static_library
+
+重新生成相关配置文件
+
+重新执行编译
+
+    python script\build.py -c D
+
