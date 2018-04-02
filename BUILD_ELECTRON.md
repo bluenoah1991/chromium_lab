@@ -148,5 +148,5 @@
 
 重新执行编译
 
-    python script\build.py -c D
+    python script\build.py -c D
 
