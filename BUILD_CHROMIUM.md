@@ -4,7 +4,7 @@
 
 安装 *Python 2.7* 和 *Git*
 
-安装 *[pywin32](https://github.com/mhammond/pywin32/releases)*
+安装 *[pywin32](https://github.com/mhammond/pywin32/releases)* ( [libchromiumcontent](https://github.com/electron/libchromiumcontent) 项目的安装前置条件中也提到了这一部分)
 
 安装 *Visual Studio 2017*，勾选 *Desktop development with C++*，*Windows 10 SDK 10.0.15063* 和 *MFC and ATL support* 组件  
 待安装完毕后，在
