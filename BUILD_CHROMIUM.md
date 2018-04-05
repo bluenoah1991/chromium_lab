@@ -26,6 +26,7 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
 | ENV | DESC | File |
 | --- | ---- | ---- |
 | GYP_MSVS_OVERRIDE_PATH | 基于该路径查找*vcvarsall.bat*文件，设置VS相关环境变量 | //src/build/toolchain/win/setup_toolchain.py |
+| GYP_MSVS_VERSION | 指定当前使用的MSVS工具链版本，默认是*2017* | //src/build/vs_toolchain.py |
 
 ## 首次运行 *gclient* 更新 *depot_tools*
 
