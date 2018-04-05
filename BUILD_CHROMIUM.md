@@ -11,6 +11,12 @@
 
 > Control Panel → Programs → Programs and Features → Select the “Windows Software Development Kit” → Change → Change → Check “Debugging Tools For Windows” → Change
 
+检查当前代码的下列位置
+
+https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15063&sq=package:chromium&dr=C&l=152
+
+当前版本中，`10.0.16299.0`的Windows SDK存在不兼容问题，脚本强制使用`10.0.15063`版本
+
 下载[depot_tools](https://storage.googleapis.com/chrome-infra/depot_tools.zip)并解压到C盘根目录
 
 将`C:\depot_tools`添加到PATH环境变量中，注意需要将其放置在Python路径前面，同时设置环境变量`DEPOT_TOOLS_WIN_TOOLCHAIN`为`0`
