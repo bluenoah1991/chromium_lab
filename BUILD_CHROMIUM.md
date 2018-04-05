@@ -21,6 +21,12 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
 
 将`C:\depot_tools`添加到PATH环境变量中，注意需要将其放置在Python路径前面，同时设置环境变量`DEPOT_TOOLS_WIN_TOOLCHAIN`为`0`
 
+## 相关环境变量
+
+| ENV | DESC | File |
+| --- | ---- | ---- |
+| GYP_MSVS_OVERRIDE_PATH | 基于该路径查找*vcvarsall.bat*文件，设置VS相关环境变量 | //src/build/toolchain/win/setup_toolchain.py |
+
 ## 首次运行 *gclient* 更新 *depot_tools*
 
 在任意位置运行命令
