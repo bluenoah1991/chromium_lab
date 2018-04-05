@@ -138,7 +138,7 @@
 
 ## 跳过 *libchromiumcontent* 拷贝发行过程，直接编译
 
-接受 [update_dist_path.diff](https://github.com/codemeow5/chromium_lab/blob/master/update_dist_path.diff)补丁
+接受 [update_dist_path.diff](https://github.com/codemeow5/chromium_lab/blob/master/update_dist_path.diff) 和 [update_dist_path_lib.diff](https://github.com/codemeow5/chromium_lab/blob/master/update_dist_path_lib.diff)补丁
 
 运行
 
