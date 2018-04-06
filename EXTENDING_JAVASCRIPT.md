@@ -574,13 +574,13 @@
       str_ = str;
     }
 
-    HobbyEvent::HobbyEvent() : Event("", false, false) {
+    HobbyEvent::HobbyEvent() : Event("", Bubbles::kNo, Cancelable::kNo) {
 
     }
 
     HobbyEvent::HobbyEvent(const AtomicString& event_type, 
                            const String& str) 
-      : Event(event_type, false, false) {
+      : Event(event_type, Bubbles::kNo, Cancelable::kNo) {
       str_ = str;
     }
 
