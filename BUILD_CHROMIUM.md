@@ -21,6 +21,17 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
 
 将`C:\depot_tools`添加到PATH环境变量中，注意需要将其放置在Python路径前面，同时设置环境变量`DEPOT_TOOLS_WIN_TOOLCHAIN`为`0`
 
+## 离线安装 *Visual Studio 2017*
+
+    C:\>vs_Enterprise.exe --layout c:\vs2017layout --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Component.VC.ATLMFC --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --add Microsoft.VisualStudio.Component.VC.140 --includeRecommended --lang en-US
+    
+    C:\vs2017layout>vs_Enterprise.exe --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Component.VC.ATLMFC --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --add Microsoft.VisualStudio.Component.VC.140 --includeRecommended
+
+参考
+
+> https://docs.microsoft.com/en-us/visualstudio/install/install-vs-inconsistent-quality-network
+> https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise
+
 ## 相关环境变量
 
 | ENV | DESC | File |
