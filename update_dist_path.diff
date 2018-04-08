@@ -27,7 +27,7 @@ index 1a407ff54..7f43c93eb 100644
 +                  '<(libchromiumcontent_dir)/obj/chromiumcontent/desktop_capture.lib',
 +                  '<(libchromiumcontent_dir)/obj/ui/events/dom_keycode_converter.lib',
 +                  '<(libchromiumcontent_dir)/obj/third_party/webrtc/rtc_base/rtc_base.lib',
-+                  '<(libchromiumcontent_dir)/obj/third_party/webrtc/rtc_base/rtc_base_approved.lib',
++                  '<(libchromiumcontent_dir)/obj/third_party/webrtc/rtc_base/rtc_base_generic.lib',
 +                  '<(libchromiumcontent_dir)/obj/chromiumcontent/system_wrappers.lib',
 +                  '<(libchromiumcontent_dir)/obj/chromiumcontent/webrtc_common.lib',
 +                  '<(libchromiumcontent_dir)/obj/third_party/webrtc_overrides/init_webrtc.lib',
