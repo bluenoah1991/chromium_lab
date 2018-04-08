@@ -89,7 +89,7 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
 
 ## 更新代码
 
-    git update-rebase  
-    gclient sync
+    git rebase-update  
+    gclient sync  
 
 
