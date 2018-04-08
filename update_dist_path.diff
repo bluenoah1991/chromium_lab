@@ -1,8 +1,8 @@
 diff --git a/brightray/brightray.gyp b/brightray/brightray.gyp
-index 63ceb3e8a..01f6fbab4 100644
+index 1a407ff54..7f43c93eb 100644
 --- a/brightray/brightray.gyp
 +++ b/brightray/brightray.gyp
-@@ -321,46 +321,46 @@
+@@ -327,46 +327,46 @@
                    '-ld3d11.lib',
                    '-ldxgi.lib',
                    # Following libs are always linked statically.
@@ -13,7 +13,7 @@ index 63ceb3e8a..01f6fbab4 100644
 -                  '<(libchromiumcontent_dir)/desktop_capture.lib',
 -                  '<(libchromiumcontent_dir)/dom_keycode_converter.lib',
 -                  '<(libchromiumcontent_dir)/rtc_base.lib',
--                  '<(libchromiumcontent_dir)/rtc_base_approved.lib',
+-                  '<(libchromiumcontent_dir)/rtc_base_generic.lib',
 -                  '<(libchromiumcontent_dir)/system_wrappers.lib',
 -                  '<(libchromiumcontent_dir)/webrtc_common.lib',
 -                  '<(libchromiumcontent_dir)/init_webrtc.lib',
@@ -87,10 +87,10 @@ index 63ceb3e8a..01f6fbab4 100644
                },
              }, {
 diff --git a/electron.gyp b/electron.gyp
-index 6f8fbcd05..25ed18b5a 100644
+index 19bf70d89..c98850621 100644
 --- a/electron.gyp
 +++ b/electron.gyp
-@@ -181,15 +181,15 @@
+@@ -186,15 +186,15 @@
                'destination': '<(PRODUCT_DIR)',
                'files': [
                  '<@(copied_libraries)',
