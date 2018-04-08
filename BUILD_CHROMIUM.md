@@ -86,3 +86,10 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
     ninja -C out\Default chrome
 
 待编译完成后，启动`out\Default\chrome.exe`
+
+## 更新代码
+
+    git update-rebase  
+    gclient sync
+
+
