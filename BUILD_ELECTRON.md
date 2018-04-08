@@ -154,6 +154,8 @@
 
 对 `//vendor/libchromiumcontent/src` 目录进行的修改，请先生成补丁文件保存好，在进行 `//vendor/libchromiumcontent/script/update` 操作时，会执行`git clean -xdf`操作，防止更新被冲洗掉
 
+由于 `//script/bootstrap.py` 使用 `git submodule update --init --recursive` 进行子仓库更新，如果你对子仓库（//vendor/libchromiumcontent）有修改，更新完成后，git会将你的子仓库重置为一个游离的 *HEAD* 状态，你需要手工进行 *merge* 或者 *rebase*  
+
 首先使用 *depot_tools* 工具附带的 *git update-rebase* 命令更新 *electron* 主仓库并解决冲突代码。
 
     git update-rebase  
