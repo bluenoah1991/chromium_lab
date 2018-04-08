@@ -150,3 +150,15 @@
 
     python script\build.py -c D
 
+## 更新 *electron*
+
+首先使用 *depot_tools* 工具附带的 *git update-rebase* 命令更新 *electron* 主仓库并解决冲突代码。
+
+    git update-rebase  
+
+使用额外的 *--update_libcc* 参数启动 *bootstrap.py*
+
+    python script\bootstrap.py -v --target_arch=ia32 --build_debug_libcc --update_libcc
+
+这会更新 *electron* 仓库的submodule，并重新执行 *vendor\libchromiumcontent\script\bootstrap* 和 *vendor\libchromiumcontent\script\update* 脚本，更新 *libchromiumcontent* 仓库
+
