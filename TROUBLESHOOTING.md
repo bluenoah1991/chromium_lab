@@ -23,3 +23,20 @@
 https://groups.google.com/a/chromium.org/d/msg/chromium-dev/KdB7oW1EhiY/HIMD6jdeCQAJ  
 https://chromium-review.googlesource.com/c/chromium/src/+/714366  
 https://chromium-review.googlesource.com/c/chromium/src/+/714366/2/build/toolchain/win/setup_toolchain.py  
+
+### error C1083: Cannot open include file: '../../../../../../../services/resource_coordinator/public/interfaces/coordination_unit_introspector.mojom-shared.cc': No such file or directory
+
+该版本的 *jumbo* GN脚本有问题，生成的源文件中 *#include* 路径有问题，需要关闭 *use_jumbo_build* 开关
+
+> //vendor/libchromiumcontent/chromiumcontent/args/shared_library.gn
+
+    ...
+    
+    use_jumbo_build = false
+    
+    ...
+
+重新编译
+
+    python script\bootstrap.py -v --target_arch=ia32 --build_debug_libcc --update_libcc  
+
