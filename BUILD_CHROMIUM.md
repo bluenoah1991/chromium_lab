@@ -89,7 +89,13 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
 
 ## 更新代码
 
+对于有改动的仓库，使用
+
     git rebase-update  
+
+进行更新，如果进入 *mid-rebase* 状态，请手工解决冲突，并重新运行命令。然后使用
+
     gclient sync  
 
+更新整个源码树
 
