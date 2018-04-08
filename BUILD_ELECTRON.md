@@ -152,6 +152,8 @@
 
 ## 更新 *electron*
 
+对 `//vendor/libchromiumcontent/src` 目录进行的修改，请先生成补丁文件保存好，在进行 `//vendor/libchromiumcontent/script/update` 操作时，会执行`git clean -xdf`操作，防止更新被冲洗掉
+
 首先使用 *depot_tools* 工具附带的 *git update-rebase* 命令更新 *electron* 主仓库并解决冲突代码。
 
     git update-rebase  
