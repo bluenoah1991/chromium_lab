@@ -61,6 +61,8 @@
 
 接受 [update_dist_path.diff](https://github.com/codemeow5/chromium_lab/blob/master/update_dist_path.diff) 和 [update_dist_path_lib.diff](https://github.com/codemeow5/chromium_lab/blob/master/update_dist_path_lib.diff)补丁
 
+从 `//vendor/libchromiumcontent/dist/main/shared_library` 拷贝 `locales` 目录到 `//vendor/libchromiumcontent/src/out-ia32/shared_library` 目录下
+
 运行
 
     python script\bootstrap.py -v --target_arch=ia32 --libcc_source_path=C:\electron\vendor\libchromiumcontent\src --libcc_shared_library_path=C:\electron\vendor\libchromiumcontent\src\out-ia32\shared_library --libcc_static_library_path=C:\electron\vendor\libchromiumcontent\src\out-ia32\static_library
