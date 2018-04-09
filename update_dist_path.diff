@@ -1,5 +1,5 @@
 diff --git a/brightray/brightray.gyp b/brightray/brightray.gyp
-index 1a407ff54..7f43c93eb 100644
+index 1a407ff54..11784003a 100644
 --- a/brightray/brightray.gyp
 +++ b/brightray/brightray.gyp
 @@ -327,46 +327,46 @@
@@ -87,15 +87,10 @@ index 1a407ff54..7f43c93eb 100644
                },
              }, {
 diff --git a/electron.gyp b/electron.gyp
-index 19bf70d89..c98850621 100644
+index 19bf70d89..32a33c22c 100644
 --- a/electron.gyp
 +++ b/electron.gyp
-@@ -186,15 +186,15 @@
-               'destination': '<(PRODUCT_DIR)',
-               'files': [
-                 '<@(copied_libraries)',
--                '<(libchromiumcontent_dir)/locales',
-+                '<(libchromiumcontent_dir)/gen/content/app/strings',
+@@ -190,11 +190,11 @@
                  '<(libchromiumcontent_dir)/libEGL.dll',
                  '<(libchromiumcontent_dir)/libGLESv2.dll',
                  '<(libchromiumcontent_dir)/icudtl.dat',
