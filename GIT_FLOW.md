@@ -10,4 +10,5 @@ https://help.github.com/articles/duplicating-a-repository/#mirroring-a-repositor
 
 http://christoph.ruegg.name/blog/git-howto-mirror-a-github-repository-without-pull-refs.html
 
+对于包含二次开发分支的仓库，不适合使用 `git push --mirror` 命令进行提交，因为该命令会对比 upstream 仓库和 mirror 仓库的分支差异，并删除二次开发分支。所以请单独更新每个上游分支。
 
