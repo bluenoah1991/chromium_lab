@@ -121,3 +121,16 @@ https://help.github.com/articles/about-pull-request-merges/#rebase-and-merge-you
 ### 未完结的工作
 
 若开发者在上述 rebase 操作前有未完结的工作，需要使用 `git diff` 和 `git format-patch` 生成补丁并保存
+
+## 提交 Chromium 项目过程中的异常
+
+由于 chromium 项目过于庞大，进行 `git push` 时发生
+
+### error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+
+需要配置 `git config --global http.postBuffer 524288000`
+
+### error: RPC failed; curl 56 OpenSSL SSL_read: error:140943FC:SSL routines:ssl3_read_bytes:sslv3 alert bad record mac, errno 0
+
+需要配置 `git config --global http.sslVersion tlsv1.2`
+
