@@ -116,3 +116,6 @@ http://christoph.ruegg.name/blog/git-howto-mirror-a-github-repository-without-pu
                  └──▶ │ A  │───▶│ U  │───▶│ B‘ │───▶│ C‘ │    new-local-dev
                       └────┘    └────┘    └────┘    └────┘                 
 
+### 未完结的工作
+
+若开发者在上述 rebase 操作前有未完结的工作，需要使用 `git diff` 和 `git format-patch` 生成补丁并保存
