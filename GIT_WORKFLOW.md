@@ -88,7 +88,9 @@ http://christoph.ruegg.name/blog/git-howto-mirror-a-github-repository-without-pu
                  └──▶ │ A  │───▶│ B  │───▶│ C  │        other-local-dev
                       └────┘    └────┘    └────┘                       
 
-当所有开发者的开发工作到一定阶段后（所有 local-dev 分支已与 add-on 分支同步完毕），对 add-on 分支进行 rebase 更新
+当所有开发者的开发工作到一定阶段后（所有 local-dev 分支已与 add-on 分支同步完毕），对 add-on 分支进行 rebase 更新。请勿使用 Github 网站上的 Pull Request 进行 rebase 操作，Github 在操作中会更新 commit hash，导致 add-on 分支与 upstream 分支产生差异  
+
+https://help.github.com/articles/about-pull-request-merges/#rebase-and-merge-your-pull-request-commits
 
     ┌────┐    ┌────┐                                           
     │ A  │───▶│ U  │                                 master    
