@@ -57,3 +57,16 @@
 
     cd c:\code\chromium_git\chromium\src
     out\Debug_GN_x86\cefclient.exe
+
+### 目录结构
+
+    ~/code/
+      automate/
+        automate-git.py   <-- CEF build script
+      chromium_git/
+        cef/              <-- CEF source checkout
+        chromium/
+          src/            <-- Chromium source checkout
+        update.[bat|sh]   <-- Bootstrap script for automate-git.py
+      depot_tools/        <-- Chromium build tools
+
