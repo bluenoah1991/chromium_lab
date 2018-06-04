@@ -79,6 +79,10 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
 
     gn gen --ide=vs out\Default --args="is_component_build = true enable_nacl = false target_cpu = \"x86\""
 
+或者
+
+    gn gen --ide=vs out\default_release_x86 --args="is_debug = false is_component_build = false enable_nacl = false target_cpu = \"x86\""
+
 ## 编译代码
 
 在`C:\chromium\src`目录运行
