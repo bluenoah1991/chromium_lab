@@ -83,6 +83,20 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
 
     gn gen --ide=vs out\default_release_x86 --args="is_debug = false is_component_build = false enable_nacl = false target_cpu = \"x86\""
 
+## 获取指定版本源码
+
+创建`C:\chromium`目录，进入目录并运行
+
+    gclient config https://chromium.googlesource.com/chromium/src.git
+
+这将生成一个`.gclient`文件，然后运行
+
+    gclient sync --revision src@{rev} --with_tags --with_branch_heads
+
+例如获取 67.0.3396.87 版本源码
+
+    gclient sync --revision src@67.0.3396.87 --with_tags --with_branch_heads
+
 ## 编译代码
 
 在`C:\chromium\src`目录运行
