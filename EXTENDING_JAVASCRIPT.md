@@ -629,6 +629,47 @@
         window->DispatchEvent(hobby_event, window->document());
       }
 
+## 创建自定义回调
+
+### 添加新类型回调的`idl`文件
+
+> //src/third_party/blink/renderer/core/frame/custom_callback_type.idl
+
+    callback CustomCallback = void();
+
+> //src/third_party/blink/renderer/bindings/core/v8/BUILD.gn
+
+    generated_core_callback_function_files = [
+    
+      ...
+    
+      "$bindings_core_v8_output_dir/v8_custom_callback.cc",
+      "$bindings_core_v8_output_dir/v8_custom_callback.h"
+      
+      ...
+
+### 之后你便可以在其它地方使用该回调函数
+
+> //src/third_party/blink/renderer/core/frame/hobby.idl
+
+    ...
+    
+    void invokeWithCallback(CustomCallback callback);
+    
+    ...
+
+> //src/third_party/blink/renderer/core/frame/hobby.h
+
+    ...
+    
+    #include "third_party/blink/renderer/bindings/core/v8/v8_custom_callback.h"
+    
+    ...
+    
+    void invokeWithCallback(V8CustomCallback* callback);
+    
+    ...
+
 ## 调试
 
 在
