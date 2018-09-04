@@ -89,7 +89,11 @@ https://cs.chromium.org/chromium/src/build/toolchain/win/setup_toolchain.py?q=15
 
     gclient config https://chromium.googlesource.com/chromium/src.git
 
-这将生成一个`.gclient`文件，然后运行
+`gclient`不会接受`GCLIENT_CACHE_DIR`环境变量，所以你需要额外指定你的缓存目录
+
+    gclient config --cache-dir C:\chromium_git_cache https://chromium.googlesource.com/chromium/src.git
+
+这将生成一个`.gclient`文件，注意检查`.gclient`中的`cache_dir`属性，然后运行
 
     gclient sync --revision src@{rev} --with_tags --with_branch_heads
 
